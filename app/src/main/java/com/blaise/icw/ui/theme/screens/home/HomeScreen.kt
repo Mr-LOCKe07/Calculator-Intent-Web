@@ -19,9 +19,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.blaise.icw.navigation.ROUTE_CALC
+import com.blaise.icw.navigation.ROUTE_INTENT
+import com.blaise.icw.navigation.ROUTE_WEB
 
 @Composable
-fun Home_Screen(modifier: Modifier = Modifier) {
+fun Home_Screen(navController: NavHostController) {
     Column (modifier = Modifier
         .padding(16.dp)
         .background(Color.White)
@@ -34,7 +39,7 @@ fun Home_Screen(modifier: Modifier = Modifier) {
             fontWeight = FontWeight.Bold,
             color = Color.Black)
 
-        Button(onClick = { /*TODO*/ },
+        Button(onClick = { navController.navigate(ROUTE_CALC) },
             modifier = Modifier.width(300.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.White),
@@ -47,7 +52,7 @@ fun Home_Screen(modifier: Modifier = Modifier) {
                 color = Color.Green)
         }
 
-        Button(onClick = { /*TODO*/ },
+        Button(onClick = { navController.navigate(ROUTE_INTENT) },
             modifier = Modifier.width(300.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.White),
@@ -59,7 +64,7 @@ fun Home_Screen(modifier: Modifier = Modifier) {
                 color = Color.Red)
         }
 
-        Button(onClick = { /*TODO*/ },
+        Button(onClick = { navController.navigate(ROUTE_WEB) },
             modifier = Modifier.width(300.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.White),
@@ -76,5 +81,5 @@ fun Home_Screen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun HomePreview() {
-    Home_Screen()
+    Home_Screen(rememberNavController())
 }

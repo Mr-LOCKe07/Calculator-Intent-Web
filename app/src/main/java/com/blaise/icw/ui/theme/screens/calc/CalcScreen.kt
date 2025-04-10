@@ -27,12 +27,14 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun Calc_Screen(modifier: Modifier = Modifier) {
+fun Calc_Screen(navController: NavHostController) {
     var firstnum by remember { mutableStateOf(TextFieldValue("")) }
     var secondnum by remember { mutableStateOf(TextFieldValue("")) }
-
+    var answer by remember { mutableStateOf("") }
 
     Column (
         verticalArrangement = Arrangement.SpaceEvenly,
@@ -42,7 +44,7 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
             .background(Color.Black)
     ){
 
-        Text(text = "Answer here!!!",
+        Text(text = answer,
             color = Color.Green,
             fontSize = 30.sp,
             fontFamily = FontFamily.Monospace)
@@ -69,7 +71,15 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(16.dp)
         )
 
-        OutlinedButton(onClick = { /*TODO*/ },
+        OutlinedButton(onClick = {
+            val myfirstnum = firstnum.text.trim()
+            val mysecondnum = secondnum.text.trim()
+            if (myfirstnum.isEmpty() || mysecondnum.isEmpty()){
+                answer="Please fill in all details"
+            }else{
+                val my_answer = myfirstnum.toDouble() + mysecondnum.toDouble()
+                answer = my_answer.toString()
+            } },
             colors = ButtonDefaults.buttonColors(Color.Transparent),
             modifier = Modifier.width(300.dp),
             border = BorderStroke(3.dp, Color.Blue)) {
@@ -79,7 +89,14 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
                 color = Color.White)
         }
 
-        OutlinedButton(onClick = { /*TODO*/ },
+        OutlinedButton(onClick = { val myfirstnum = firstnum.text.trim()
+            val mysecondnum = secondnum.text.trim()
+            if (myfirstnum.isEmpty() || mysecondnum.isEmpty()){
+                answer="Please fill in all details"
+            }else{
+                val my_answer = myfirstnum.toDouble() - mysecondnum.toDouble()
+                answer = my_answer.toString()
+            } },
             colors = ButtonDefaults.buttonColors(Color.Transparent),
             modifier = Modifier.width(300.dp),
             border = BorderStroke(3.dp, Color.Red)
@@ -90,7 +107,14 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
                 color = Color.White)
         }
 
-        OutlinedButton(onClick = { /*TODO*/ },
+        OutlinedButton(onClick = { val myfirstnum = firstnum.text.trim()
+            val mysecondnum = secondnum.text.trim()
+            if (myfirstnum.isEmpty() || mysecondnum.isEmpty()){
+                answer="Please fill in all details"
+            }else{
+                val my_answer = myfirstnum.toDouble() * mysecondnum.toDouble()
+                answer = my_answer.toString()
+            } },
             colors = ButtonDefaults.buttonColors(Color.Transparent),
             modifier = Modifier.width(300.dp),
             border = BorderStroke(3.dp, Color.Magenta)) {
@@ -100,7 +124,14 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
                 color = Color.White)
         }
 
-        OutlinedButton(onClick = { /*TODO*/ },
+        OutlinedButton(onClick = { val myfirstnum = firstnum.text.trim()
+            val mysecondnum = secondnum.text.trim()
+            if (myfirstnum.isEmpty() || mysecondnum.isEmpty()){
+                answer="Please fill in all details"
+            }else{
+                val my_answer = myfirstnum.toDouble() / mysecondnum.toDouble()
+                answer = my_answer.toString()
+            } },
             colors = ButtonDefaults.buttonColors(Color.Transparent),
             modifier = Modifier.width(300.dp),
             border = BorderStroke(3.dp, Color.Yellow)) {
@@ -115,5 +146,5 @@ fun Calc_Screen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun CalcPreview() {
-    Calc_Screen()
+    Calc_Screen(rememberNavController())
 }
