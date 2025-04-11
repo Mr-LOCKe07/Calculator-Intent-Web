@@ -28,6 +28,7 @@ import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.core.net.toUri
 
 @Composable
 fun Intent_Screen(navController: NavHostController) {
@@ -124,7 +125,7 @@ fun Intent_Screen(navController: NavHostController) {
         OutlinedButton(onClick = {
             val emailIntent =
                 Intent(Intent.ACTION_SENDTO, Uri.fromParts
-                    ("mail to", "abc@gmail.com", null))
+                    ("mailto", "abc@gmail.com", null))
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject")
 
             emailIntent.putExtra(Intent.EXTRA_TEXT, "Body")
@@ -152,11 +153,11 @@ fun Intent_Screen(navController: NavHostController) {
         }
 
         OutlinedButton(onClick = {
-            val uri = Uri.parse("sms to:07456789")
+            val uri = "smsto:07456789".toUri()
 
             val intent = Intent(Intent.ACTION_SENDTO, uri)
 
-            intent.putExtra("Hello", "How is today's weather")
+            intent.putExtra("Hello", "How is todays weather")
 
             context.startActivity(intent)
         },
