@@ -33,7 +33,7 @@ import androidx.core.net.toUri
 @Composable
 fun Intent_Screen(navController: NavHostController) {
 
-    var context = LocalContext.current
+    val context = LocalContext.current
 
     Column (
         verticalArrangement = Arrangement.SpaceEvenly,
@@ -47,7 +47,7 @@ fun Intent_Screen(navController: NavHostController) {
             fontFamily = FontFamily.Serif)
 
         OutlinedButton(onClick = {
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+918511812660"))
+            val intent = Intent(Intent.ACTION_CALL, ("tel:" + "+918511812660").toUri())
 
             if (ContextCompat.checkSelfPermission(
                     context,
